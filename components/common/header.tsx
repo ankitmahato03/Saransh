@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 export default function Header() {
   const isLogdIn = false;
   return (
-    <nav className="container flex items-center justify-between py-4 lg:px-8 px-4 mx-auto max-w-screen-xl bg-amber-300 mt-1.5 border rounded-sm">
+    <nav className="container flex items-center justify-between py-4 lg:px-8 px-4 mx-auto max-w-screen-xl bg-amber-300 mt-1.5 border rounded-sm ">
       {/* Logo */}
       <div className="flex items-center space-x-2">
         <Link
@@ -15,7 +15,7 @@ export default function Header() {
           <FileText className="w-6 h-6 lg:w-8 lg:h-8 text-gray-500 hover:rotate-12 transform transition duration-200 ease-in-out" />
           <span className="font-extrabold lg:text-xl text-gray-900">
             {" "}
-            saransh
+            Saransh
           </span>
         </Link>
       </div>

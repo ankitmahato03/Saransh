@@ -14,7 +14,14 @@ export default function HeroSection() {
       </Badge>
 
       <h1 className="text-6xl lg:max-w-4xl font-bold text-center py-6">
-        Transform PDFs into concise summries
+        Transform PDFs into{" "}
+        <span className=" relative inline-block">
+          <span className=" relative z-10 px-2" aria-hidden="true">
+            concise{" "}
+          </span>
+          <span className="absolute inset-0 bg-red-300/50 -rotate-2 rounded-lg transform -skew-y-1 "></span>
+        </span>
+        Summries
       </h1>
       <h2 className="text-lg  sm:text-xl lg:text-2xl text-center px-4 lg:px-0 lg:max-w-4xl text-gray-600">
         Get a beautiful summary reel of the documents in seconds{" "}
