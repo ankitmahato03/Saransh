@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkle } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ export default function HeroSection() {
     <section className="relative mx-auto flex flex-col z-0 items-center justify-center py-16 sm:py-20 lg:pb-28 transition-all animate-in lg:px-12 max-w-7xl">
       <Badge variant="outline" className="text-xl bg-amber-300 rounded-3xl">
         <div className="flex items-center">
-          <Sparkle className="h-6 w-6 mr-1 text-rose-700 animate-pulse" />
+          <Sparkles className="h-6 w-6 mr-1 text-[#fd0000] animate-pulse" />
           <p>Powered By AI </p>
         </div>
       </Badge>

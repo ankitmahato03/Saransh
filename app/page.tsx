@@ -1,5 +1,6 @@
 import DemoSection from "@/components/home/demo-section";
 import HeroSection from "@/components/home/hero-section";
+import HowItWorksSection from "@/components/home/how-it-works";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
    <div className="relative w-full">
     <HeroSection/>
     <DemoSection/>
+    <HowItWorksSection/>
   
    </div>
   );
