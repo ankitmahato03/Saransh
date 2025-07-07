@@ -9,17 +9,17 @@ type Step = {
 
 const steps: Step[] = [
   {
-    icon: <FileText />,
+    icon: <FileText size={64} strokeWidth={1.5} />,
     label: "Upload PDF",
     description: "Easily upload your PDF document to get started.",
   },
   {
-    icon: <CloudAlertIcon />,
+    icon: <CloudAlertIcon  size={64} strokeWidth={1.5}/>,
     label: "Process",
     description: "Our system processes the document to extract key insights.",
   },
   {
-    icon: <LogOutIcon />,
+    icon: <LogOutIcon  size={64} strokeWidth={1.5}/>,
     label: "Download Summary",
     description: "Download the summarized version of your document.",
   },
@@ -39,13 +39,13 @@ export default function HowItWorksSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
           {steps.map((step, idx) => (
-            <div className="relative flex items-stretch">
-              <StepItem key={idx} {...step} />
+            <div className="relative flex items-stretch" key={idx}>
+              <StepItem  {...step} />
               {idx<steps.length - 1 && (
               <div className="hidden md:block top-1/2 -right-4  absolute transform -translate-y-1/2 z-10">
                 <MoveRight
                   size={32}
-                  strokeWidth={1}
+                  strokeWidth={2}
                   className="text-rose-500"
                 />
               </div>
