@@ -1,9 +1,9 @@
 import { FileText } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
-  const isLogdIn = false;
   return (
     <nav className="container flex items-center justify-between py-4 lg:px-8 px-4 mx-auto max-w-screen-xl bg-amber-300 mt-1.5 border rounded-sm ">
       {/* Logo */}
@@ -28,20 +28,21 @@ export default function Header() {
         >
           Pricing
         </Link>
-        {isLogdIn && (
+        <SignedIn>
           <Link
             href="/dashboard"
             className="text-gray-600 hover:text-black transition-colors duration-200"
           >
             Your Summaries
           </Link>
-        )}
+        </SignedIn>
       </div>
 
       {/* Sign in  */}
+      {/* if you have any confusion please go to video timestam:- 2.16.43 */}
 
       <div className="flex gap-3 items-center">
-        {isLogdIn ? (
+        <SignedIn>
           <div className="flex gap-2 items-center">
             <Link
               href="/upload"
@@ -50,18 +51,22 @@ export default function Header() {
               <Button>Upload PDF</Button>
             </Link>
             <div>pro</div>
-            <Button>User</Button>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
-        ) : (
-          <div>
-            <Link
-              href="/sign-in"
-              className="text-gray-600 hover:text-black transition-colors duration-200"
-            >
-              Sign in
-            </Link>
-          </div>
-        )}
+        </SignedIn>
+
+      <SignedOut>
+        <div>
+          <Link
+            href="/sign-in"
+            className="text-gray-600 hover:text-black transition-colors duration-200"
+          >
+            Sign in
+          </Link>
+        </div>
+        </SignedOut>
       </div>
     </nav>
   );
