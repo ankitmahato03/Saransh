@@ -20,7 +20,7 @@ export default function UploadHeader(){
               <span className=" relative z-10 px-2" aria-hidden="true">
                 Your PDF's{" "}
               </span>
-              <span className="absolute inset-0 bg-red-300/50 -rotate-2 rounded-lg transform -skew-y-1 "></span>
+              <span className="absolute inset-0 bg-red-500/50 -rotate-2 rounded-lg transform -skew-y-1 "></span>
             </span>
           </div>
           <div className="mt-2 leading-8 text-lg  text-gray-600 max-w-2xl text-center">
