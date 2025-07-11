@@ -10,16 +10,16 @@ interface UploadFormInputProps {
 export default function UploadFormInput({ onSubmit }: UploadFormInputProps) {
   return (
     <form className="flex flex-col  gap-6" onSubmit={onSubmit}>
-      <div className="flex justify-end items-center gap-1">
+      <div className="flex justify-end items-center gap-2">
         <Input
           type="file"
           id="file"
-          name="file "
+          name="file"
           accept="application/pdf"
           required
           className=""
         />
-        <Button>Upload Your PDF</Button>
+        <Button type="submit">Upload Your PDF</Button>
       </div>
     </form>
   );
