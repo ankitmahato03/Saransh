@@ -4,6 +4,7 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
+import generatePdfSummry from "@/actions/upload-action";
 
 const schema = z.object({
   file: z
@@ -64,12 +65,14 @@ export default function UploadForm() {
     });
       return;
     }
-    
-    if(file)
+
     toast.info("Processing PDF", {
       description: "Hang On Uor AI is Doign his Job",
       
     });
+
+    const summery=await generatePdfSummry(res);
+
   };
   return (
     <div className="flex flex-col gap-8 mx-auto max-w-2xl w-full">
