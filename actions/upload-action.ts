@@ -32,7 +32,7 @@ export async function generatePdfSummry(
   if (!pdfUrl) {
     return {
       success: false,
-      message: "File Upload Fail",
+      message: "File Upload failed",
       data: null,
     };
   }
