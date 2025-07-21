@@ -4,7 +4,7 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
-import generatePdfSummry from "@/actions/upload-action";
+import { generatePdfSummry } from "@/actions/upload-action";
 
 const schema = z.object({
   file: z
@@ -20,9 +20,10 @@ const schema = z.object({
 
 export default function UploadForm() {
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
-    onClientUploadComplete: () => {
-      console.log("File Uploaded Successfully");
-      toast.success('File Uploaded Successfully')
+    onClientUploadComplete: (res) => {
+      console.log("File Uploaded Successfully", res);
+      console.log("📄 File URL (ufs):", res[0].ufsUrl);
+      toast.success("File Uploaded Successfully");
     },
     onUploadError: (err) => {
       console.error("Error While Uploading", err);
@@ -30,7 +31,6 @@ export default function UploadForm() {
     },
     onUploadBegin: ({ file }) => {
       console.log("File Begain to upload", file);
-      
     },
   });
 
@@ -38,7 +38,7 @@ export default function UploadForm() {
     e.preventDefault();
     console.log("Submitted");
     const formData = new FormData(e.currentTarget);
-    const file = formData.get("file");
+    const file = formData.get("file") as File;
     console.log(file);
 
     const validatedFeilds = schema.safeParse({ file });
@@ -50,29 +50,24 @@ export default function UploadForm() {
       return;
     }
 
-
-
     toast.info("Uploading  PDF", {
       description: "Hang On for a while ",
-      
     });
 
     const res = await startUpload([file]);
     if (!res) {
       toast.warning("Something Went Wrong", {
-      description: "Please USe a correct file ",
-      
-    });
+        description: "Please USe a correct file ",
+      });
       return;
     }
 
     toast.info("Processing PDF", {
       description: "Hang On Uor AI is Doign his Job",
-      
     });
 
-    const summery=await generatePdfSummry(res);
-
+    const summery = await generatePdfSummry(res);
+    console.log({ summery });
   };
   return (
     <div className="flex flex-col gap-8 mx-auto max-w-2xl w-full">

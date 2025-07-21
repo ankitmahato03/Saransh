@@ -8,7 +8,6 @@ export const ourfileRouter = {
   pdfUploader: f({ pdf: { maxFileSize: "32MB" } })
     .middleware(async ({ req }) => {
       //Get user Info
-
       const user = await currentUser();
       if (!user) throw new UploadThingError("unauthorize");
       return { userId: user.id };
@@ -16,8 +15,8 @@ export const ourfileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       console.log("upload Completed for user iD", metadata.userId);
       console.log("file url", file.ufsUrl);
-      return { userId: metadata.userId, file};
+      return { userId: metadata.userId, file };
     }),
 } satisfies FileRouter;
 
-export type ourfileRouter = typeof ourfileRouter;
+export type OurfileRouter = typeof ourfileRouter;

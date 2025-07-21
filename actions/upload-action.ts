@@ -1,49 +1,111 @@
+// "use server";
+
+// import { fetchAndExtractPdfText } from "@/lib/langchain";
+
+// export async function generatePdfSummry(
+//   uploadResopnse: [
+//     {
+//       serverData: {
+//         userId: string;
+//         file: {
+//           ufsurl: string;
+//           name: string;
+//         };
+//       };
+//     }
+//   ]
+// ) {
+//   if (!uploadResopnse) {
+//     return {
+//       success: false,
+//       message: "File Upload Fail",
+//       data: null,
+//     };
+//   }
+//   const {
+//     serverData: {
+//       userId,
+//       file: { ufsurl: pdfUrl, name: fileName },
+//     },
+//   } = uploadResopnse[0];
+
+//   if (!pdfUrl) {
+//     return {
+//       success: false,
+//       message: "File Upload failedgit ",
+//       data: null,
+//     };
+//   }
+
+//   try {
+//     const pdfText = await fetchAndExtractPdfText(pdfUrl);
+//   } catch (err) {
+//     return {
+//       success: false,
+//       message: "File Upload Fail",
+//       data: null,
+//     };
+//   }
+// }
+
+
 "use server";
 
-import fetchAndExtractPdfText from "@/lib/langchain";
+import { fetchAndExtractPdfText } from "@/lib/langchain";
 
 export async function generatePdfSummry(
-  uploadResopnse: [
+  uploadResponse: [
     {
       serverData: {
-        userId: String;
+        userId: string;
         file: {
-          url: String;
-          name: String;
+          ufsUrl: string;
+          name: string;
         };
       };
     }
   ]
 ) {
-  if (!uploadResopnse) {
+  if (!uploadResponse) {
     return {
       success: false,
-      message: "File Upload Fail",
+      message: "File Upload Failed",
       data: null,
     };
   }
+
   const {
     serverData: {
       userId,
-      file: { url: pdfUrl, name: fileName },
+      file: { ufsUrl: pdfUrl, name: fileName },
     },
-  } = uploadResopnse[0];
+  } = uploadResponse[0];
 
   if (!pdfUrl) {
     return {
       success: false,
-      message: "File Upload failedgit ",
+      message: "File URL missing",
       data: null,
     };
   }
 
   try {
     const pdfText = await fetchAndExtractPdfText(pdfUrl);
+    return {
+      success: true,
+      message: "PDF processed",
+      data: {
+        fileName,
+        pdfText,
+        userId,
+      },
+    };
   } catch (err) {
     return {
       success: false,
-      message: "File Upload Fail",
+      message: "PDF processing failed",
       data: null,
     };
   }
 }
+
