@@ -46,34 +46,24 @@
 //       data: null,
 //     };
 //   }
-// }
-
+// }s
 
 "use server";
 
 import { fetchAndExtractPdfText } from "@/lib/langchain";
+import type { ClientUploadedFileData } from "uploadthing/types";
 
 export async function generatePdfSummry(
   uploadResponse: [
-    {
-      serverData: {
-        userId: string;
-        file: {
-          ufsUrl: string;
-          name: string;
-        };
+    ClientUploadedFileData<{
+      userId: string;
+      file: {
+        ufsUrl: string;
+        name: string;
       };
-    }
+    }>
   ]
 ) {
-  if (!uploadResponse) {
-    return {
-      success: false,
-      message: "File Upload Failed",
-      data: null,
-    };
-  }
-
   const {
     serverData: {
       userId,
@@ -90,7 +80,7 @@ export async function generatePdfSummry(
   }
 
   try {
-    const pdfText = await fetchAndExtractPdfText(pdfUrl);
+    const pdfText = await fetchAndExtractPdfText(pdfUrl); // <-- your logic here
     return {
       success: true,
       message: "PDF processed",
@@ -108,4 +98,3 @@ export async function generatePdfSummry(
     };
   }
 }
-

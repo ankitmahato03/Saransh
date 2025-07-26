@@ -29,8 +29,8 @@ export default function UploadForm() {
       console.error("Error While Uploading", err);
       toast.error("Uploaded didnt went Successfully");
     },
-    onUploadBegin: ({ file }) => {
-      console.log("File Begain to upload", file);
+    onUploadBegin: (fileName) => {
+      console.log("File Begain to upload", fileName);
     },
   });
 
@@ -54,20 +54,22 @@ export default function UploadForm() {
       description: "Hang On for a while ",
     });
 
-    const res = await startUpload([file]);
-    if (!res) {
-      toast.warning("Something Went Wrong", {
-        description: "Please USe a correct file ",
-      });
-      return;
-    }
+   const res = await startUpload([file]);
+if (!res || res.length === 0) {
+  toast.warning("Something Went Wrong", {
+    description: "Please use a correct file",
+  });
+  return;
+}
 
-    toast.info("Processing PDF", {
-      description: "Hang On Uor AI is Doign his Job",
-    });
+toast.info("Processing PDF", {
+  description: "Hang On, our AI is doing its job...",
+});
 
-    const summery = await generatePdfSummry(res);
-    console.log({ summery });
+// ✅ FIX: Pass only the first file wrapped in a tuple
+const summery = await generatePdfSummry([res[0] ]);
+console.log({ summery });
+
   };
   return (
     <div className="flex flex-col gap-8 mx-auto max-w-2xl w-full">
