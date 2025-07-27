@@ -54,22 +54,25 @@ export default function UploadForm() {
       description: "Hang On for a while ",
     });
 
-   const res = await startUpload([file]);
-if (!res || res.length === 0) {
-  toast.warning("Something Went Wrong", {
-    description: "Please use a correct file",
-  });
-  return;
-}
+    const res = await startUpload([file]);
+    if (!res || res.length === 0) {
+      toast.warning("Something Went Wrong", {
+        description: "Please use a correct file",
+      });
+      return;
+    }
 
-toast.info("Processing PDF", {
-  description: "Hang On, our AI is doing its job...",
-});
+    toast.info("Processing PDF", {
+      description: "Hang On, our AI is doing its job...",
+    });
 
-// ✅ FIX: Pass only the first file wrapped in a tuple
-const summery = await generatePdfSummry([res[0] ]);
-console.log({ summery });
+    // ✅ FIX: Pass only the first file wrapped in a tuple
+    // const summery = await generatePdfSummry([res[0] ]);
+    // console.log({ summery });
 
+    // const fileData = res[0]?.serverData;
+    const summery = await generatePdfSummry(res as any);
+    console.log({ summery });
   };
   return (
     <div className="flex flex-col gap-8 mx-auto max-w-2xl w-full">
