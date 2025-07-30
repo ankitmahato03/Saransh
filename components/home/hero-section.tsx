@@ -19,7 +19,7 @@ export default function HeroSection() {
           <span className=" relative z-10 px-2" aria-hidden="true">
             concise{" "}
           </span>
-          <span className="absolute inset-0 bg-red-300/50 -rotate-2 rounded-lg transform -skew-y-1 "></span>
+          <span className="absolute inset-0 bg-amber-300/70 -rotate-2 rounded-lg transform -skew-y-1 "></span>
         </span>
         Summries
       </h1>

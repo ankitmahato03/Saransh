@@ -48,7 +48,7 @@ export default function Header() {
               href="/upload"
               className="text-gray-600 hover:text-black transition-colors duration-200"
             >
-              <Button>Upload PDF</Button>
+              <Button variant={"outline"}>Upload PDF</Button>
             </Link>
             <div>pro</div>
             <SignedIn>
