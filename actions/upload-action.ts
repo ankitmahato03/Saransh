@@ -1,53 +1,3 @@
-// "use server";
-
-// import { fetchAndExtractPdfText } from "@/lib/langchain";
-
-// export async function generatePdfSummry(
-//   uploadResopnse: [
-//     {
-//       serverData: {
-//         userId: string;
-//         file: {
-//           ufsurl: string;
-//           name: string;
-//         };
-//       };
-//     }
-//   ]
-// ) {
-//   if (!uploadResopnse) {
-//     return {
-//       success: false,
-//       message: "File Upload Fail",
-//       data: null,
-//     };
-//   }
-//   const {
-//     serverData: {
-//       userId,
-//       file: { ufsurl: pdfUrl, name: fileName },
-//     },
-//   } = uploadResopnse[0];
-
-//   if (!pdfUrl) {
-//     return {
-//       success: false,
-//       message: "File Upload failedgit ",
-//       data: null,
-//     };
-//   }
-
-//   try {
-//     const pdfText = await fetchAndExtractPdfText(pdfUrl);
-//   } catch (err) {
-//     return {
-//       success: false,
-//       message: "File Upload Fail",
-//       data: null,
-//     };
-//   }
-// }s
-
 "use server";
 
 import { fetchAndExtractPdfText } from "@/lib/langchain";
@@ -58,20 +8,20 @@ export async function generatePdfSummry(
     ClientUploadedFileData<{
       userId: string;
       file: {
-        ufsUrl: string;
+        ufsUrl: any;
         name: string;
       };
     }>
   ]
 ) {
-  const {
-    serverData: {
-      userId,
-      file: { ufsUrl: pdfUrl, name: fileName },
-    },
-  } = uploadResponse[0];
+const {
+  serverData: { userId },
+  ufsUrl: ufsUrl,
+  name: fileName,
+} = uploadResponse[0];
 
-  if (!pdfUrl) {
+
+  if (!ufsUrl) {
     return {
       success: false,
       message: "File URL missing",
@@ -80,7 +30,7 @@ export async function generatePdfSummry(
   }
 
   try {
-    const pdfText = await fetchAndExtractPdfText(pdfUrl); // <-- your logic here
+    const pdfText = await fetchAndExtractPdfText(ufsUrl); // <-- your logic here
     return {
       success: true,
       message: "PDF processed",
