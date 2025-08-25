@@ -3,7 +3,7 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
-import { generatePdfSummry } from "@/actions/upload-action";
+import { generatePdfSummry, storePdfSummry } from "@/actions/upload-action";
 import { useEffect, useState } from "react";
 
 const schema = z.object({
@@ -20,7 +20,7 @@ const schema = z.object({
 
 export default function UploadForm() {
 
-    const [summery, setSummery] = useState<{ success: boolean } | null>(null);
+    const [fsummery, setfSummery] = useState<{ success: boolean } | null>(null);
 
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
     onClientUploadComplete: (res) => {
@@ -74,11 +74,18 @@ export default function UploadForm() {
     // const fileData = res[0]?.serverData;
 
     const result = await generatePdfSummry(res as any);
+    const {data=null,message=null}=result || {};
+
+    if (data) {
+      toast.info("Saving PDF", {
+      description: "Hang On, we are daving your pDF...",
+    });
+}
     console.log({ result });
-    setSummery(result);
+    setfSummery(result);
   };
     useEffect(()=>{
-     if (summery?.success) {
+     if (fsummery?.success) {
       const timer =setTimeout(()=>{
         toast.info("Processing PDF", {
       description: "Hang On, our AI is doing its job...",
@@ -86,7 +93,7 @@ export default function UploadForm() {
       },2000);
      return ()=>clearTimeout(timer)
     }
-    },[summery])
+    },[fsummery])
 
   return (
     <div className="flex flex-col gap-8 mx-auto max-w-2xl w-full">
